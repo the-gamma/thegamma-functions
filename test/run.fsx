@@ -5,11 +5,10 @@
 #r "../packages/Microsoft.AspNet.WebApi.Core/lib/net45/System.Web.Http.dll"
 #r "System.Net.Http"
 #r "Newtonsoft.Json"
+#r @"..\packages\Suave\lib\net40\Suave.dll"
 #else
 module MyAzureFunction
 #endif
-
-#r @"..\packages\Suave\lib\net40\Suave.dll"
 
 open System.Net
 open System.Net.Http
