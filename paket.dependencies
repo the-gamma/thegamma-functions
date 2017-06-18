@@ -2,6 +2,9 @@ framework: >= net40
 source https://nuget.org/api/v2
 
 nuget FAKE
+nuget Microsoft.AspNet.WebApi.Client
+nuget Microsoft.AspNet.WebApi.Core
+nuget Microsoft.Azure.WebJobs
 nuget Suave
 nuget FSharp.Data
 nuget FSharp.Compiler.Tools
