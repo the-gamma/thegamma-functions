@@ -6,10 +6,9 @@
 #r "System.Net.Http"
 #r "Newtonsoft.Json"
 #r @"..\packages\Suave\lib\net40\Suave.dll"
-#else
-module MyAzureFunction
 #endif
 
+#load "../helper.fs"
 open System.Net
 open System.Net.Http
 open Newtonsoft.Json
@@ -45,7 +44,7 @@ let Run(req: HttpRequestMessage, log: TraceWriter) =
 
         match name with
         | Some x ->
-            return req.CreateResponse(HttpStatusCode.OK, "Hello " + x.Value);
+            return req.CreateResponse(HttpStatusCode.OK, Helper.zzz + " " + x.Value);
         | None ->
             let! data = req.Content.ReadAsStringAsync() |> Async.AwaitTask
 

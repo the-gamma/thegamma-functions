@@ -11,7 +11,7 @@
           "lib/net40/Dynamitey.dll": {}
         }
       },
-      "FSharp.Core/3.1.2.1": {
+      "FSharp.Core/4.0.0.1": {
         "type": "package",
         "compile": {
           "lib/net40/FSharp.Core.dll": {}
@@ -32,6 +32,18 @@
         "runtime": {
           "lib/portable-net45+sl50+win/FSharp.Interop.Dynamic.dll": {}
         }
+      },
+      "Suave/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.0.0.1"
+        },
+        "compile": {
+          "lib/net40/Suave.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Suave.dll": {}
+        }
       }
     }
   },
@@ -50,41 +62,41 @@
         "lib/portable-win+net45+sl40+wp80/Dynamitey.dll"
       ]
     },
-    "FSharp.Core/3.1.2.1": {
-      "sha512": "5xdd0n/yvMdPLQrnxTlu70xAm1KkG0ugh4zZpX7pK1FCTtPCB1A8R1gnD7t6EeRMzuCUh4n62cfVvFxayy3fpQ==",
+    "FSharp.Core/4.0.0.1": {
+      "sha512": "lNtlbbJ5hP8LEd7nKtTUiGEpLmHLWiU39x+0jq4rmRWG7Mgj6vYm+gmTOhtwpiPFX8j8zUsfLyA8AC7dZY75LQ==",
       "type": "package",
-      "path": "fsharp.core/3.1.2.1",
+      "path": "fsharp.core/4.0.0.1",
       "files": [
-        "fsharp.core.3.1.2.1.nupkg.sha512",
+        "fsharp.core.4.0.0.1.nupkg.sha512",
         "fsharp.core.nuspec",
-        "lib/MonoAndroid/FSharp.Core.dll",
-        "lib/MonoAndroid/FSharp.Core.optdata",
-        "lib/MonoAndroid/FSharp.Core.sigdata",
-        "lib/MonoAndroid/FSharp.Core.xml",
-        "lib/MonoTouch/FSharp.Core.dll",
-        "lib/MonoTouch/FSharp.Core.optdata",
-        "lib/MonoTouch/FSharp.Core.sigdata",
-        "lib/MonoTouch/FSharp.Core.xml",
+        "lib/net20/FSharp.Core.dll",
+        "lib/net20/FSharp.Core.optdata",
+        "lib/net20/FSharp.Core.sigdata",
+        "lib/net20/FSharp.Core.xml",
         "lib/net40/FSharp.Core.dll",
         "lib/net40/FSharp.Core.optdata",
         "lib/net40/FSharp.Core.sigdata",
         "lib/net40/FSharp.Core.xml",
-        "lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.dll",
-        "lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.optdata",
-        "lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.sigdata",
-        "lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.xml",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.dll",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.optdata",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.sigdata",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.xml",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.dll",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.optdata",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.sigdata",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/FSharp.Core.xml",
-        "lib/portable-net45+sl5+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.dll",
-        "lib/portable-net45+sl5+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.optdata",
-        "lib/portable-net45+sl5+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.sigdata",
-        "lib/portable-net45+sl5+netcore45+MonoAndroid1+MonoTouch1/FSharp.Core.xml"
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.dll",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.optdata",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.sigdata",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.xml",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.dll",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.optdata",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.sigdata",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.xml",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.optdata",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.sigdata",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.xml",
+        "lib/portable-net45+netcore45/FSharp.Core.dll",
+        "lib/portable-net45+netcore45/FSharp.Core.optdata",
+        "lib/portable-net45+netcore45/FSharp.Core.sigdata",
+        "lib/portable-net45+netcore45/FSharp.Core.xml",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.dll",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.optdata",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.sigdata",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.xml"
       ]
     },
     "FSharp.Interop.Dynamic/3.0.0": {
@@ -96,17 +108,33 @@
         "fsharp.interop.dynamic.nuspec",
         "lib/portable-net45+sl50+win/FSharp.Interop.Dynamic.dll"
       ]
+    },
+    "Suave/2.1.0": {
+      "sha512": "OySVG8tSVRNHu9uZVMCFmexBIu+wFo6plwnC7UtMlW+fis0srQ00lL77OA7HQFqJmYOVGmm6EVBzKqHyWwYLgA==",
+      "type": "package",
+      "path": "suave/2.1.0",
+      "files": [
+        "lib/net40/Suave.dll",
+        "lib/net40/Suave.dll.config",
+        "lib/net40/Suave.pdb",
+        "lib/net40/Suave.xml",
+        "lib/netstandard1.6/Suave.dll",
+        "lib/netstandard1.6/Suave.xml",
+        "suave.2.1.0.nupkg.sha512",
+        "suave.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [],
     ".NETFramework,Version=v4.6": [
-      "FSharp.Interop.Dynamic >= 3.0.0"
+      "FSharp.Interop.Dynamic >= 3.0.0",
+      "Suave >= 2.1.0"
     ]
   },
   "tools": {},
   "projectFileToolGroups": {},
   "packageFolders": {
-    "D:\\home\\data\\Functions\\packages\\nuget": {}
+    "C:\\Users\\Tomas\\data\\Functions\\packages\\nuget": {}
   }
 }
