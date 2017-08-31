@@ -32,6 +32,9 @@ let config = """
 
 let root = __SOURCE_DIRECTORY__ </> "/../wwwroot"
 
+printfn "SOURCE: %s" __SOURCE_DIRECTORY__ 
+printfn "ROOT: %s" root
+
 Target "generate" (fun _ ->  
   let special = set ["src"; ".fake"; ".git"; ".paket"; "packages"]
 
