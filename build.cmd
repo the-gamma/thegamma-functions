@@ -11,6 +11,4 @@ if not exist paket.lock (
 if errorlevel 1 (
   exit /b %errorlevel%
 )
-if not defined SCM_COMMIT_ID (
-  packages\FAKE\tools\FAKE.exe %* --fsiargs build.fsx
-)
+packages\FAKE\tools\FAKE.exe %* --fsiargs build.fsx
