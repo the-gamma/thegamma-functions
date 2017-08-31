@@ -30,7 +30,7 @@ let config = """
   "disabled": false
 }"""
 
-let root = __SOURCE_DIRECTORY__ </> "../wwwroot"
+let root = __SOURCE_DIRECTORY__ </> "/../wwwroot"
 
 Target "generate" (fun _ ->  
   let special = set ["src"; ".fake"; ".git"; ".paket"; "packages"]
