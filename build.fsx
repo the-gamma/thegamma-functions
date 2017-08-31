@@ -1,10 +1,9 @@
 #r "packages/FAKE/tools/FakeLib.dll"
 #load "src/app.fsx"
 open Fake
+open System.IO
 
-#if INTERACTIVE
-System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
-#endif
+// System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 let code = """
 $r "../packages/Microsoft.Azure.WebJobs/lib/net45/Microsoft.Azure.WebJobs.Host.dll"
@@ -34,6 +33,13 @@ let config = """
 }"""
 
 Target "generate" (fun _ ->  
+  let special = set ["src"; ".fake"; ".git"; ".paket"; "packages"]
+
+  Directory.GetDirectories(".")
+  |> Seq.map Path.GetFileName
+  |> Seq.filter (special.Contains >> not)
+  |> Seq.iter DeleteDir
+
   for func in App.app do
     CleanDir func.Name
     WriteStringToFile false (func.Name </> "run.fsx") (code.Replace("xxxxxx", func.Name).Replace("$","#"))
