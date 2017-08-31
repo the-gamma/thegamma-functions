@@ -33,8 +33,6 @@ let config = """
   "disabled": false
 }"""
 
-System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
-
 Target "generate" (fun _ ->  
   for func in ["experiment"] do
     CleanDir func
