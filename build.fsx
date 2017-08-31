@@ -3,8 +3,6 @@
 open Fake
 open System.IO
 
-// System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
-
 let code = """
 $r "../packages/Microsoft.Azure.WebJobs/lib/net45/Microsoft.Azure.WebJobs.Host.dll"
 $r "../packages/Microsoft.AspNet.WebApi.Client/lib/net45/System.Net.Http.Formatting.dll"
@@ -32,18 +30,20 @@ let config = """
   "disabled": false
 }"""
 
+let root = __SOURCE_DIRECTORY__ </> "../wwwroot"
+
 Target "generate" (fun _ ->  
   let special = set ["src"; ".fake"; ".git"; ".paket"; "packages"]
 
-  Directory.GetDirectories(".")
+  Directory.GetDirectories(root)
   |> Seq.map Path.GetFileName
   |> Seq.filter (special.Contains >> not)
   |> Seq.iter DeleteDir
 
   for func in App.app do
     CleanDir func.Name
-    WriteStringToFile false (func.Name </> "run.fsx") (code.Replace("xxxxxx", func.Name).Replace("$","#"))
-    WriteStringToFile false (func.Name </> "function.json") config
+    WriteStringToFile false (root </> func.Name </> "run.fsx") (code.Replace("xxxxxx", func.Name).Replace("$","#"))
+    WriteStringToFile false (root </> func.Name </> "function.json") config
 )
 
 Target "run" (fun _ ->  
