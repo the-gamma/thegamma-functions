@@ -1,78 +1,47 @@
 #r "packages/FAKE/tools/FakeLib.dll"
+#load "src/app.fsx"
 open Fake
 
-let code = """
-#r "../packages/Microsoft.Azure.WebJobs/lib/net45/Microsoft.Azure.WebJobs.Host.dll"
-#r "../packages/Microsoft.AspNet.WebApi.Client/lib/net45/System.Net.Http.Formatting.dll"
-#r "../packages/Microsoft.AspNet.WebApi.Core/lib/net45/System.Web.Http.dll"
-#r "System.Net.Http"
+#if INTERACTIVE
+System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
+#endif
 
-open System.Net
+let code = """
+$r "../packages/Microsoft.Azure.WebJobs/lib/net45/Microsoft.Azure.WebJobs.Host.dll"
+$r "../packages/Microsoft.AspNet.WebApi.Client/lib/net45/System.Net.Http.Formatting.dll"
+$r "../packages/Microsoft.AspNet.WebApi.Core/lib/net45/System.Web.Http.dll"
+$r "System.Net.Http"
+$load "../src/app.fsx"
+$load "../src/lambda/azure.fs"
+open Lambda
 open System.Net.Http
 open Microsoft.Azure.WebJobs.Host
 
-let Run(req: HttpRequestMessage, log: TraceWriter) =
-  req.CreateResponse(HttpStatusCode.OK, "Totally")
+let Run (req:HttpRequestMessage, log:TraceWriter) =
+  Lambda.Azure.runFunction "xxxxxx" App.app req log
 """
 
 let config = """
-{
-  "bindings": [
-    {
-      "authLevel": "anonymous",
+{ "bindings": [
+    { "authLevel": "anonymous",
       "name": "req",
       "type": "httpTrigger",
-      "direction": "in"
-    },
-    {
-      "name": "res",
+      "direction": "in" },
+    { "name": "res",
       "type": "http",
-      "direction": "out"
-    }
-  ],
+      "direction": "out" } ],
   "disabled": false
 }"""
 
 Target "generate" (fun _ ->  
-  for func in ["experiment"] do
-    CleanDir func
-    WriteStringToFile false (func </> "run.fsx") code
-    WriteStringToFile false (func </> "function.json") config
+  for func in App.app do
+    CleanDir func.Name
+    WriteStringToFile false (func.Name </> "run.fsx") (code.Replace("xxxxxx", func.Name).Replace("$","#"))
+    WriteStringToFile false (func.Name </> "function.json") config
+)
+
+Target "run" (fun _ ->  
+  ()
 )
 
 RunTargetOrDefault "generate"
-
-(*
-    async {
-        log.Info(sprintf 
-            "F# HTTP trigger function processed a request.")
-
-        let ctx = 
-          let req = Unchecked.defaultof<HttpRequest>
-          let res = Unchecked.defaultof<HttpResult>
-          let rtm = Unchecked.defaultof<HttpRuntime>
-          let cnn = Unchecked.defaultof<_>
-          { request = req
-            runtime = rtm
-            connection = cnn 
-            userState = Map.empty
-            response = res }
-
-        // Set name to query string
-        let name =
-            req.GetQueryNameValuePairs()
-            |> Seq.tryFind (fun q -> q.Key = "name")
-
-        match name with
-        | Some x ->
-            return req.CreateResponse(HttpStatusCode.OK, Helper.zzz + " " + x.Value);
-        | None ->
-            let! data = req.Content.ReadAsStringAsync() |> Async.AwaitTask
-
-            if not (String.IsNullOrEmpty(data)) then
-                let named = JsonConvert.DeserializeObject<Message>(data)
-                return req.CreateResponse(HttpStatusCode.OK, "Hello " + named.name);
-            else
-                return req.CreateResponse(HttpStatusCode.BadRequest, "Specify a Name value");
-    } |> Async.RunSynchronously
-                *)
